@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TestProjectsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentName" Type="nvarchar(max)" />
+          <Property Name="CourseId" Type="int" />
+        </EntityType>
+        <EntityType Name="StudentSelectedCourse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" />
+          <Property Name="CourseId" Type="int" />
+        </EntityType>
+        <Association Name="FK__Student__CourseI__1920BF5C">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentSe__Cours__1FCDBCEB">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="StudentSelectedCourse" Type="Self.StudentSelectedCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentSelectedCourse">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentSe__Stude__145C0A3F">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="StudentSelectedCourse" Type="Self.StudentSelectedCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentSelectedCourse">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentSe__Stude__15502E78">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="StudentSelectedCourse" Type="Self.StudentSelectedCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentSelectedCourse">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentSe__Stude__173876EA">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="StudentSelectedCourse" Type="Self.StudentSelectedCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentSelectedCourse">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentSe__Stude__182C9B23">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="StudentSelectedCourse" Type="Self.StudentSelectedCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentSelectedCourse">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestProjectsModelStoreContainer">
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentSelectedCourse" EntityType="Self.StudentSelectedCourse" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Student__CourseI__1920BF5C" Association="Self.FK__Student__CourseI__1920BF5C">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentSe__Cours__1FCDBCEB" Association="Self.FK__StudentSe__Cours__1FCDBCEB">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="StudentSelectedCourse" EntitySet="StudentSelectedCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentSe__Stude__145C0A3F" Association="Self.FK__StudentSe__Stude__145C0A3F">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentSelectedCourse" EntitySet="StudentSelectedCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentSe__Stude__15502E78" Association="Self.FK__StudentSe__Stude__15502E78">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentSelectedCourse" EntitySet="StudentSelectedCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentSe__Stude__173876EA" Association="Self.FK__StudentSe__Stude__173876EA">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentSelectedCourse" EntitySet="StudentSelectedCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentSe__Stude__182C9B23" Association="Self.FK__StudentSe__Stude__182C9B23">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentSelectedCourse" EntitySet="StudentSelectedCourse" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestProjectsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Student__CourseI__1920BF5C" FromRole="Courses" ToRole="Student" />
+          <NavigationProperty Name="StudentSelectedCourses" Relationship="Self.FK__StudentSe__Cours__1FCDBCEB" FromRole="Courses" ToRole="StudentSelectedCourse" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CourseId" Type="Int32" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK__Student__CourseI__1920BF5C" FromRole="Student" ToRole="Courses" />
+          <NavigationProperty Name="StudentSelectedCourses" Relationship="Self.FK__StudentSe__Stude__145C0A3F" FromRole="Student" ToRole="StudentSelectedCourse" />
+        </EntityType>
+        <EntityType Name="StudentSelectedCourse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" />
+          <Property Name="CourseId" Type="Int32" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK__StudentSe__Cours__1FCDBCEB" FromRole="StudentSelectedCourse" ToRole="Courses" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__StudentSe__Stude__145C0A3F" FromRole="StudentSelectedCourse" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK__Student__CourseI__1920BF5C">
+          <End Role="Courses" Type="TestProjectsModel.Courses" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentSe__Cours__1FCDBCEB">
+          <End Role="Courses" Type="TestProjectsModel.Courses" Multiplicity="0..1" />
+          <End Role="StudentSelectedCourse" Type="Self.StudentSelectedCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentSelectedCourse">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentSe__Stude__145C0A3F">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="StudentSelectedCourse" Type="Self.StudentSelectedCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentSelectedCourse">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentSe__Stude__15502E78">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="StudentSelectedCourse" Type="Self.StudentSelectedCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentSelectedCourse">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentSe__Stude__173876EA">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="StudentSelectedCourse" Type="Self.StudentSelectedCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentSelectedCourse">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentSe__Stude__182C9B23">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="StudentSelectedCourse" Type="Self.StudentSelectedCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentSelectedCourse">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestProjectsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Courses" EntityType="TestProjectsModel.Courses" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="StudentSelectedCourses" EntityType="Self.StudentSelectedCourse" />
+          <AssociationSet Name="FK__Student__CourseI__1920BF5C" Association="Self.FK__Student__CourseI__1920BF5C">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentSe__Cours__1FCDBCEB" Association="Self.FK__StudentSe__Cours__1FCDBCEB">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="StudentSelectedCourse" EntitySet="StudentSelectedCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentSe__Stude__145C0A3F" Association="Self.FK__StudentSe__Stude__145C0A3F">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentSelectedCourse" EntitySet="StudentSelectedCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentSe__Stude__15502E78" Association="Self.FK__StudentSe__Stude__15502E78">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentSelectedCourse" EntitySet="StudentSelectedCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentSe__Stude__173876EA" Association="Self.FK__StudentSe__Stude__173876EA">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentSelectedCourse" EntitySet="StudentSelectedCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentSe__Stude__182C9B23" Association="Self.FK__StudentSe__Stude__182C9B23">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentSelectedCourse" EntitySet="StudentSelectedCourses" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestProjectsModelStoreContainer" CdmEntityContainer="TestProjectsEntities">
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="TestProjectsModel.Courses">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="TestProjectsModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentSelectedCourses">
+            <EntityTypeMapping TypeName="TestProjectsModel.StudentSelectedCourse">
+              <MappingFragment StoreEntitySet="StudentSelectedCourse">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
