@@ -12,22 +12,18 @@ namespace TestProject.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Student
+    public partial class Class
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Student()
+        public Class()
         {
-            this.StudentSelectedCourses = new HashSet<StudentSelectedCourse>();
+            this.Students = new HashSet<Student>();
         }
     
-        public int Id { get; set; }
-        public string StudentName { get; set; }
-        public Nullable<int> CourseId { get; set; }
-        public Nullable<int> ClassId { get; set; }
+        public int id { get; set; }
+        public string ClassName { get; set; }
     
-        public virtual Courses Courses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentSelectedCourse> StudentSelectedCourses { get; set; }
-        public virtual Class Class { get; set; }
+        public virtual ICollection<Student> Students { get; set; }
     }
 }

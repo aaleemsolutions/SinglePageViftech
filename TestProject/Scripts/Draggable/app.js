@@ -205,11 +205,11 @@ window.onload = function() {
         url: '/Home/GetCourses',
         type: 'GET',
         success: function (data1) {
-            $.each(data1, function (i, item) {
-                alert(i)
-                data = data + item
-            });
-            
+            //$.each(data1, function (i, item) {
+                
+            //    data = data + item
+            //});
+            getprocess(data1);
         },
         error: function (error) {
             $(that).remove();
@@ -217,29 +217,34 @@ window.onload = function() {
         }
     });
   
-    
-	var availableMetrics = document.getElementById("available_metrics_list");
-	
-	for (var i = 0; i < data.length; i++) {
-		var liElement = document.createElement("li");
-		liElement.appendChild(document.createTextNode(data[i]));
-		availableMetrics.appendChild(liElement);
-		var liElementDraggable = new Draggable(liElement);
-	}
-	
-	var availableMetricsDroppable = new Droppable(availableMetrics, function(draggable) {
-		if (this.element !== draggable.element.parentNode) {
-			this.element.appendChild(draggable.element);
-		}
-	});
-	
-	var selectedMetricsDroppable = new Droppable("next_metric", function(draggable) {
-		if (this.element.parentNode !== draggable.element.parentNode) {
-			this.element.parentNode.insertBefore(draggable.element, this.element);
-		}
-	});
-	
-	new Droppable("remove_metric", function(draggable) {
-		availableMetricsDroppable.onDragDrop(draggable);
-	});
+   
 };
+
+
+function getprocess(data) {
+
+    var availableMetrics = document.getElementById("available_metrics_list");
+
+    for (var i = 0; i < data.length; i++) {
+        var liElement = document.createElement("li");
+        liElement.appendChild(document.createTextNode(data[i]));
+        availableMetrics.appendChild(liElement);
+        var liElementDraggable = new Draggable(liElement);
+    }
+
+    var availableMetricsDroppable = new Droppable(availableMetrics, function (draggable) {
+        if (this.element !== draggable.element.parentNode) {
+            this.element.appendChild(draggable.element);
+        }
+    });
+
+    var selectedMetricsDroppable = new Droppable("next_metric", function (draggable) {
+        if (this.element.parentNode !== draggable.element.parentNode) {
+            this.element.parentNode.insertBefore(draggable.element, this.element);
+        }
+    });
+
+    new Droppable("remove_metric", function (draggable) {
+        availableMetricsDroppable.onDragDrop(draggable);
+    });
+}

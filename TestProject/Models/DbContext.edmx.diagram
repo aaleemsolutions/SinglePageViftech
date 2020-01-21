@@ -14,6 +14,8 @@
         <AssociationConnector Association="TestProjectsModel.FK__StudentSe__Stude__15502E78" ManuallyRouted="false" />
         <AssociationConnector Association="TestProjectsModel.FK__StudentSe__Stude__173876EA" ManuallyRouted="false" />
         <AssociationConnector Association="TestProjectsModel.FK__StudentSe__Stude__182C9B23" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TestProjectsModel.Class" Width="1.5" PointX="0.75" PointY="4.75" />
+        <AssociationConnector Association="TestProjectsModel.FK__Student__ClassId__34C8D9D1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

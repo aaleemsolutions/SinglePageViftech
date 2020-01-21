@@ -4,7 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TestProjectsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TestProjectsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Classes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="Courses">
           <Key>
             <PropertyRef Name="Id" />
@@ -19,6 +26,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StudentName" Type="nvarchar(max)" />
           <Property Name="CourseId" Type="int" />
+          <Property Name="ClassId" Type="int" />
         </EntityType>
         <EntityType Name="StudentSelectedCourse">
           <Key>
@@ -28,6 +36,18 @@
           <Property Name="StudentId" Type="int" />
           <Property Name="CourseId" Type="int" />
         </EntityType>
+        <Association Name="FK__Student__ClassId__34C8D9D1">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Student__CourseI__1920BF5C">
           <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
@@ -101,9 +121,14 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="TestProjectsModelStoreContainer">
+          <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentSelectedCourse" EntityType="Self.StudentSelectedCourse" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Student__ClassId__34C8D9D1" Association="Self.FK__Student__ClassId__34C8D9D1">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
           <AssociationSet Name="FK__Student__CourseI__1920BF5C" Association="Self.FK__Student__CourseI__1920BF5C">
             <End Role="Courses" EntitySet="Courses" />
             <End Role="Student" EntitySet="Student" />
@@ -129,8 +154,7 @@
             <End Role="StudentSelectedCourse" EntitySet="StudentSelectedCourse" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TestProjectsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -152,6 +176,8 @@
           <Property Name="CourseId" Type="Int32" />
           <NavigationProperty Name="Courses" Relationship="Self.FK__Student__CourseI__1920BF5C" FromRole="Student" ToRole="Courses" />
           <NavigationProperty Name="StudentSelectedCourses" Relationship="Self.FK__StudentSe__Stude__145C0A3F" FromRole="Student" ToRole="StudentSelectedCourse" />
+          <Property Name="ClassId" Type="Int32" />
+          <NavigationProperty Name="Class" Relationship="TestProjectsModel.FK__Student__ClassId__34C8D9D1" FromRole="Student" ToRole="Class" />
         </EntityType>
         <EntityType Name="StudentSelectedCourse">
           <Key>
@@ -263,7 +289,32 @@
             <End Role="Student" EntitySet="Students" />
             <End Role="StudentSelectedCourse" EntitySet="StudentSelectedCourses" />
           </AssociationSet>
+          <EntitySet Name="Classes" EntityType="TestProjectsModel.Class" />
+          <AssociationSet Name="FK__Student__ClassId__34C8D9D1" Association="TestProjectsModel.FK__Student__ClassId__34C8D9D1">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Students" Relationship="TestProjectsModel.FK__Student__ClassId__34C8D9D1" FromRole="Class" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK__Student__ClassId__34C8D9D1">
+          <End Type="TestProjectsModel.Class" Role="Class" Multiplicity="0..1" />
+          <End Type="TestProjectsModel.Student" Role="Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -281,6 +332,7 @@
           <EntitySetMapping Name="Students">
             <EntityTypeMapping TypeName="TestProjectsModel.Student">
               <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="StudentName" ColumnName="StudentName" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
@@ -293,6 +345,14 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="TestProjectsModel.Class">
+              <MappingFragment StoreEntitySet="Classes">
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

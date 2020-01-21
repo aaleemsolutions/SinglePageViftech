@@ -28,5 +28,6 @@ namespace TestProject.Models
         public virtual DbSet<Courses> Courses { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudentSelectedCourse> StudentSelectedCourses { get; set; }
+        public virtual DbSet<Class> Classes { get; set; }
     }
 }
